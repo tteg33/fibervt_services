@@ -1,4 +1,4 @@
 module.exports = {
-	databaseConnection: require('./connection'),
-	UserRepo: require('./repository/UserRepo'),
+	databaseConnection: require('../connection'),
+	UserRepo: require('../repository/UserRepo'),
 }

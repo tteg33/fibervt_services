@@ -5,16 +5,14 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
 	email: String,
         password: String,
-        salt: String,
 	username: String,
-	uploadedModel:[{type: Schema.Types.ObjectId, ref: 'modelattr', require: true }]},
+	uploadedModel:[{type: Schema.Types.ObjectId, ref: 'modelattr', require: false }]},
 	{toJSON:{
 		transform(doc, ret){
 			delete ret.password;
-			delete ret.salt;
 			delete __v;
 		}}
 	},
 );
 
-module.exports = mongoose.model('address', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

@@ -1,13 +1,13 @@
 const express = require('express')
-const Attrs = require('../database/models/ModelAttr')
-const auth = require('../utils/index')
+const GlbAttrs = require('../database/models/ModelAttr')
+const auth = require('../utils/auth')
 const routes = express.Router()
 
-routes.post('/todo/add', auth, async (req, res) => {
-    const newTodo = req.body
+routes.post('/attr/upload', auth, async (req, res) => {
+    const newGlbAttr= req.body
 
-    const fieldsToAdd = Object.keys(newTodo)
-    const fieldsInModel = ['title', 'description']
+    const fieldsToAdd = Object.keys(newGlbAttr)
+    const fieldsInModel = ['name', 'url', 'size', 'encrypted', 'timestamp']
     const isAdditionAllowed = fieldsToAdd.every((field) => fieldsInModel.includes(field))
 
     if (!isAdditionAllowed) {
@@ -15,28 +15,28 @@ routes.post('/todo/add', auth, async (req, res) => {
     }
 
     try {
-        const todo = await ToDos({
-            ...newTodo,
+        const glbattr = await GlbAttrs({
+            ...newGlbAttr,
             user: req.user._id,
         })
 
-        await todo.save()
+        await glbattr.save()
 
-        res.send({ todo })
+        res.send({ glbattr })
     }
     catch (e) {
         res.status(400).send(e)
     }
 })
 
-routes.post('/todo/list', auth, async (req, res) => {
+routes.post('/attr/history', auth, async (req, res) => {
     try {
 
-        const todos = await ToDos.find({
+        const glbattrs = await GlbAttrs.find({
             user: req.user._id
         })
 
-        res.send(todos)
+        res.send(glbattrs)
     }
     catch (e) {
         res.status(500).send

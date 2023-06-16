@@ -32,5 +32,5 @@ app.use(userRoutes)
 //app.use(errorRoutes)
 
 app.listen(port, () => {
-    console.log('ToDo server is up on port ' + port)
+    console.log('Test server is up on port ' + port)
 })

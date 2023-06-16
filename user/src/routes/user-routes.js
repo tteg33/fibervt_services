@@ -1,6 +1,6 @@
 const express = require('express')
 const Users = require('../database/models/User')
-const auth = require('../utils/index')
+const auth = require('../utils/auth')
 const routes = express.Router()
 
 
